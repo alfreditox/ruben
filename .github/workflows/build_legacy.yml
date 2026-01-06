@@ -1,0 +1,32 @@
+name: Legacy Build 32-bit Win7
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Generate embedded release.zip
+        run: |
+           ./setup_files.ps1
+           python zipper.py
+
+      - name: Install Rust i686-gnu
+        run: rustup target add i686-pc-windows-gnu
+
+      - name: Build Legacy Binary
+        run: |
+          $env:RUSTFLAGS="-C target-feature=-sse2"
+          cargo build --release --target i686-pc-windows-gnu
+
+      - name: Upload Binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: flatcam_legacy_win7_32bit
+          path: target/i686-pc-windows-gnu/release/*.exe

@@ -1,0 +1,8 @@
+target/
+dist/
+downloads/
+src/python/
+src/FlatCAM/
+*.lock
+*.zip
+!src/bin/hello.rs

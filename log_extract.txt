@@ -1,0 +1,5 @@
+Primera ejecución detectada. Extrayendo archivos...
+Esto puede tardar un momento.
+File: "D:\\Udimagen\\ruben\\flatcam_launcher\\target\\release\\data\\python\\etc\\"
+Failed to create file "D:\\Udimagen\\ruben\\flatcam_launcher\\target\\release\\data\\python\\etc\\": El nombre del directorio no es válido. (os error 267)
+Error: Os { code: 267, kind: NotADirectory, message: "El nombre del directorio no es válido." }
