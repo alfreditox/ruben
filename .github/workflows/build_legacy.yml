@@ -13,6 +13,7 @@ jobs:
           msystem: MINGW32
           install: mingw-w64-i686-toolchain
           update: true
+          path-type: inherit
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,9 +29,11 @@ jobs:
         run: rustup target add i686-pc-windows-gnu
 
       - name: Build Legacy Binary
+        shell: msys2 {0}
         run: |
-          gcc --version
-          $env:RUSTFLAGS="-C target-feature=-sse2 -C linker=gcc"
+          echo "Using MSYS2 shell"
+          which gcc
+          export RUSTFLAGS="-C target-feature=-sse2"
           cargo build --release --target i686-pc-windows-gnu --verbose
 
       - name: Upload Binary
