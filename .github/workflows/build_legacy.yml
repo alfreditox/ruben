@@ -29,7 +29,8 @@ jobs:
 
       - name: Build Legacy Binary
         run: |
-          $env:RUSTFLAGS="-C target-feature=-sse2"
+          gcc --version
+          $env:RUSTFLAGS="-C target-feature=-sse2 -C linker=gcc"
           cargo build --release --target i686-pc-windows-gnu --verbose
 
       - name: Upload Binary
