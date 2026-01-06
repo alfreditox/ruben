@@ -7,10 +7,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install MinGW 32-bit
-        run: |
-          choco install mingw --x86 --force -y
-          echo "C:\ProgramData\chocolatey\lib\mingw\tools\install\mingw32\bin" >> $env:GITHUB_PATH
+      - name: Setup MSYS2 and MinGW 32-bit
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW32
+          install: mingw-w64-i686-toolchain
+          update: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
